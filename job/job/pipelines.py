@@ -20,14 +20,14 @@ class JobPipeline:
         # 设置文件第一行的字段名，注意要跟spider传过来的字典key名称相同
         self.fieldnames = ['公司名称', '薪资',
                            '工作岗位', '要求工作经验', '要求学历',
-                           '公司地址', '招聘链接']
+                           '公司地址', '公司人数', '标签1', '标签2', '标签3', '招聘链接']
         self.writer = csv.writer(self.f, delimiter=',')
         self.writer.writerow(self.fieldnames)
 
     def process_item(self, item, spider):
         line = [
             item['company'], item['scalary'], item['jobs'], item['experiences'], item['degree'], item['work_address'],
-            item['url']
+            item['company_persion'], item['tag1'], item['tag2'], item['tag3'], item['url']
         ]
         self.writer.writerow(line)
         return item

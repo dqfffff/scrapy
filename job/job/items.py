@@ -14,6 +14,9 @@ class JobItem(scrapy.Item):
     experiences = scrapy.Field()  # 要求工作经验
     degree = scrapy.Field()  # 要求学历
     work_address = scrapy.Field()  # 公司地址
-    # company_persion = scrapy.Field()  # 公司人数
+    company_persion = scrapy.Field()  # 公司人数
+    tag1 = scrapy.Field()   # 标签
+    tag2 = scrapy.Field()   # 标签
+    tag3 = scrapy.Field()   # 标签
     # financing_condition = scrapy.Field()  # 融资情况
     url = scrapy.Field()  # 招聘链接

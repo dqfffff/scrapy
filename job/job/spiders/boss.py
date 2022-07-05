@@ -8,9 +8,9 @@ class BossSpider(scrapy.Spider):
     allowed_domains = ['zhipin.com']
     prefix_url = 'https://www.zhipin.com'
     start_urls = ['http://www.zhipin.com/']
-
+    # , 'java工程师', '前端开发', '数据库开发', '律师', '前台', '家政', '架构师', '爬虫'
     def __init__(self, name=None, **kwargs):
-        self.keyword_list = ['数据分析', 'java工程师', '前端开发', '数据库开发', '律师', '前台', '家政', '架构师', '爬虫']
+        self.keyword_list = ['数据分析']
         self.now_keyword_index = 0
         self.url = 'https://www.zhipin.com/web/geek/job?query={keyword}&city={city}&page={pageNo}'
         self.now_page = 1
@@ -62,10 +62,15 @@ class BossSpider(scrapy.Spider):
             experiences = tag_list.xpath(".//li[1]/text()").get()
             degree = tag_list.xpath(".//li[2]/text()").get()
             company = ''.join(info.xpath(".//h3[@class='company-name']/a/text()").extract())
+            tag = info.xpath(".//div[@class='job-card-footer clearfix']//ul[@class='tag-list']")
+            tag1 = tag.xpath(".//li[1]/text()").get()
+            tag2 = tag.xpath(".//li[2]/text()").get()
+            tag3 = tag.xpath(".//li[3]/text()").get()
+
             # company_tag_list = info.xpath("//div[@class='company-info']//ul[@class='company-tag-list']/li")
             # if len(company_tag_list == 3):
             #     financing_condition = info.xpath("//div[@class='company-info']//ul[@class='company-tag-list']/li[2]/text()").get()
-            #     company_persion = info.xpath("//div[@class='company-info']//ul[@class='company-tag-list']/li[3]/text()").get()
+            company_persion = info.xpath("//div[@class='company-info']//ul[@class='company-tag-list']/li[3]/text()").get()
             # else:
             #     financing_condition = info.xpath("//div[@class='company-info']//ul[@class='company-tag-list']/li[2]/text()").get()
             #     company_persion = ''
@@ -76,8 +81,11 @@ class BossSpider(scrapy.Spider):
             item['experiences'] = experiences
             item['degree'] = degree
             item['company'] = company
+            item['tag1'] = tag1
+            item['tag2'] = tag2
+            item['tag3'] = tag3
             # item['financing_condition'] = financing_condition
-            # item['company_persion'] = company_persion
+            item['company_persion'] = company_persion
             yield item
         try:
             self.now_page = self.now_page + 1
