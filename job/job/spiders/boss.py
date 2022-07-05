@@ -8,9 +8,9 @@ class BossSpider(scrapy.Spider):
     allowed_domains = ['zhipin.com']
     prefix_url = 'https://www.zhipin.com'
     start_urls = ['http://www.zhipin.com/']
-    # , 'java工程师', '前端开发', '数据库开发', '律师', '前台', '家政', '架构师', '爬虫'
     def __init__(self, name=None, **kwargs):
-        self.keyword_list = ['数据分析']
+        self.keyword_list = ['数据分析', 'java工程师', '前端开发', '数据库开发', '律师', '前台', '家政', '架构师', '爬虫','python工程师','软件测试','硬件工程师'
+,'软件工程师','it项目经理','安全运维工程师','游戏开发工程师']
         self.now_keyword_index = 0
         self.url = 'https://www.zhipin.com/web/geek/job?query={keyword}&city={city}&page={pageNo}'
         self.now_page = 1
